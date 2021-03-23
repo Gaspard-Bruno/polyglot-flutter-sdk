@@ -19,28 +19,51 @@ class PolyglotLanguage extends ChangeNotifier {
 
   List<Locale> get suportedLocales =>
       _localizedStrings?.langs?.keys.map((e) {
-        return Locale(e);
+        return _getLocale(e);
       }).toList() ??
       [];
 
   PolyglotModel? get localizedStrings => _localizedStrings;
 
-  Future<bool> init({required String apiKey}) async {
+  Future init({required String apiKey}) async {
     _polyglotApi = PolyglotApi(apiKey: apiKey);
     _localizedStrings = await _polyglotApi?.getPolyglotLanguages();
     var prefs = await SharedPreferences.getInstance();
     if (prefs.getString('language_code') == null) {
-      _appLocale = Locale('us');
-      return true;
+      _appLocale = _getLocale(_localizedStrings?.langs?.keys.first ?? "en");
+    } else {
+      _appLocale = Locale(prefs.getString('language_code') ?? "en");
     }
-    _appLocale = Locale(prefs.getString('language_code') ?? "en");
-    return true;
   }
 
   void changeLanguage(Locale locale) async {
+    var prefs = await SharedPreferences.getInstance();
     if (suportedLocales.contains(locale)) {
       _appLocale = locale;
+      prefs.setString('language_code', locale.toLanguageTag());
       notifyListeners();
+    }
+  }
+
+  void changeLanguageFromString(String localeStr) async {
+    var prefs = await SharedPreferences.getInstance();
+    var locale = _getLocale(localeStr);
+    if (suportedLocales.contains(locale)) {
+      _appLocale = locale;
+      prefs.setString('language_code', locale.toLanguageTag());
+      notifyListeners();
+    }
+  }
+
+  Locale _getLocale(String langCode) {
+    var sufixs = langCode.split('-');
+    switch (sufixs.length) {
+      case 1:
+        return Locale(sufixs[0]);
+      case 2:
+        return Locale(sufixs[0], sufixs[1]);
+      default:
+        return Locale(_localizedStrings?.langs?.keys.first ?? "en");
     }
   }
 }

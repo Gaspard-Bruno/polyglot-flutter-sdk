@@ -1,7 +1,7 @@
 name: polyglot_flutter_sdk
 description: flutter sdk for Polyglot, a localize app api
 version: 0.0.1
-author: anderson.cancado@gaspardbruno.com
+author: Anderson <anderson.cancado@gaspardbruno.com>
 #homepage:
 
 environment:

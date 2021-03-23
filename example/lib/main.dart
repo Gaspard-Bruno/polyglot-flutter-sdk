@@ -59,9 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
     //
     var appLanguage = Provider.of<PolyglotLanguage>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text("EXA"),
-      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -101,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: TextButton(
                           child: Text('Polyglot $lang'),
                           onPressed: () {
-                            appLanguage.changeLanguage(Locale(lang));
+                            appLanguage.changeLanguageFromString(lang);
                           },
                         ),
                       )

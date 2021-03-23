@@ -9,18 +9,16 @@ class PolyglotModel {
 
   PolyglotModel.fromJson(Map<String, dynamic> data) {
     langs = data.map((key, value) => MapEntry<String, Map<String, String>>(
-        key, Map<String, String>.from(value)));
+        _toLanguageTag(key), Map<String, String>.from(value)));
   }
 }
 
-class PolyLanguages {
-  Map<String, String>? localizedStrings;
+extension on PolyglotModel {
+  String _toLanguageTag(String key) {
+    final regx = RegExp(r'([a-z]*)-([a-z]*)');
 
-  PolyLanguages(key, {this.localizedStrings});
-
-  PolyLanguages.fromJson(Map<String, dynamic> data) {
-    localizedStrings = Map<String, String>.from(data);
+    return key.splitMapJoin(regx,
+        onMatch: (m) => '${m.group(1)}-${m.group(2)?.toUpperCase() ?? ""}',
+        onNonMatch: (n) => '${n.substring(0)}');
   }
-
-  String toString() => "${localizedStrings.toString()}";
 }
