@@ -1,7 +1,6 @@
 library polyglot_flutter_sdk;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/polyglot_localization.dart';
+export 'src/polyglot_language.dart';
+export 'src/polyglot_model.dart';
+export 'src/polyglot_provider.dart';
