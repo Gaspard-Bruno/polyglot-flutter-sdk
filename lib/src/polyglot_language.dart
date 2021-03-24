@@ -25,12 +25,12 @@ class PolyglotLanguage extends ChangeNotifier {
 
   PolyglotModel? get localizedStrings => _localizedStrings;
 
-  Future init({required String apiKey}) async {
+  Future init({required String apiKey, required String defaultLocale}) async {
     _polyglotApi = PolyglotApi(apiKey: apiKey);
     _localizedStrings = await _polyglotApi?.getPolyglotLanguages();
     var prefs = await SharedPreferences.getInstance();
     if (prefs.getString('language_code') == null) {
-      _appLocale = _getLocale(_localizedStrings?.langs?.keys.first ?? "en");
+      _appLocale = _getLocale(defaultLocale);
     } else {
       _appLocale = Locale(prefs.getString('language_code') ?? "en");
     }
@@ -50,7 +50,7 @@ class PolyglotLanguage extends ChangeNotifier {
     var locale = _getLocale(localeStr);
     if (suportedLocales.contains(locale)) {
       _appLocale = locale;
-      prefs.setString('language_code', locale.toLanguageTag());
+      prefs.setString('language_code', localeStr);
       notifyListeners();
     }
   }

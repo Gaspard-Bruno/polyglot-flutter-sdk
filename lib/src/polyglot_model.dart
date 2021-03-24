@@ -18,7 +18,7 @@ extension on PolyglotModel {
     final regx = RegExp(r'([a-z]*)-([a-z]*)');
 
     return key.splitMapJoin(regx,
-        onMatch: (m) => '${m.group(1)}-${m.group(2)?.toUpperCase() ?? ""}',
+        onMatch: (m) => '${m.group(1)}_${m.group(2)?.toUpperCase() ?? ""}',
         onNonMatch: (n) => '${n.substring(0)}');
   }
 }

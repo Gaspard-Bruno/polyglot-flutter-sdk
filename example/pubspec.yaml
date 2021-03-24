@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  provider:
   polyglot_flutter_sdk: 
     path: ../
 
