@@ -25,8 +25,9 @@ class PolyglotLanguage extends ChangeNotifier {
 
   PolyglotModel? get localizedStrings => _localizedStrings;
 
-  Future init({required String apiKey, required String defaultLocale}) async {
-    _polyglotApi = PolyglotApi(apiKey: apiKey);
+  Future init(
+      {required String projectUrl, required String defaultLocale}) async {
+    _polyglotApi = PolyglotApi(projectUrl: projectUrl);
     _localizedStrings = await _polyglotApi?.getPolyglotLanguages();
     var prefs = await SharedPreferences.getInstance();
     if (prefs.getString('language_code') == null) {

@@ -7,7 +7,10 @@ import 'package:polyglot_flutter_sdk/polyglot_flutter_sdk.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   PolyglotLanguage appLanguage = PolyglotLanguage.instance;
-  await appLanguage.init(apiKey: '', defaultLocale: 'en_US');
+  await appLanguage.init(
+      projectUrl:
+          'https://d8wlqn7pvlrac.cloudfront.net/c81e728d9d4c2f636f067f89cc14862c/all.json',
+      defaultLocale: 'en_US');
   runApp(MyApp(
     appLanguage: appLanguage,
   ));

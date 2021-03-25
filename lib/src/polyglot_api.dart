@@ -1,17 +1,15 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:polyglot_flutter_sdk/src/constants.dart';
 
 import 'package:polyglot_flutter_sdk/src/polyglot_model.dart';
 
 class PolyglotApi {
-  final String apiKey;
+  final String projectUrl;
 
-  const PolyglotApi({required this.apiKey});
+  const PolyglotApi({required this.projectUrl});
 
   Future<PolyglotModel> getPolyglotLanguages() async {
-    //TODO: Use api key on server url
-    final url = Uri.parse(Constants.serverUlr);
+    final url = Uri.parse(projectUrl);
     final response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     final jsonString = json.decode(utf8.decode(response.bodyBytes));

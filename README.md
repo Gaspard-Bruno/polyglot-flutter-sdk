@@ -1,10 +1,25 @@
 
 # Polyglot (Dart Client)
 
+
+## From Developers
+
+Open Source
+We make tools to let your products speak all languages.
+
+Let your developers create strings directly from the code using our SDK's.
+
+## Translation Management System
+One source of truth for all the translators in your team.
+
+Backed by Google Translate. Deploy Strings on the fly, quick and easy.
+
+[Polyglot](https://polyglot.cloud/)
+
 ## Features
 
 - fetch localization strings from polyglot api
-
+- create strings directly from the code ** TODO 
 
 ## Getting started
 
@@ -34,7 +49,10 @@ Future<void> main() async {
     /// Initiate polyglot_sdk in your project
     ///
   PolyglotLanguage appLanguage = PolyglotLanguage.instance;
-  await appLanguage.init(apiKey: '', defaultLocale: 'en_US');
+   await appLanguage.init(
+      projectUrl:
+          'https://d8wlqn7pvlrac.cloudfront.net/c81e728d9d4c2f636f067f89cc14862c/all.json',
+      defaultLocale: 'en_US');
   runApp(MyApp(
     appLanguage: appLanguage,
   ));
