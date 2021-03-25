@@ -27,7 +27,7 @@ You should ensure that you add the router as a dependency in your flutter projec
 
 ```yaml
 dependencies:
- polyglot_flutter_sdk: ^0.1.0
+ polyglot_flutter_sdk: ^0.0.1
 ```
 
 ## Example Project
