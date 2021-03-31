@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:polyglot_flutter_sdk/src/polyglot_api.dart';
-import 'package:polyglot_flutter_sdk/src/polyglot_model.dart';
+import 'package:polyglot_flutter_sdk/src/api/base_polyglot_api.dart';
+import 'package:polyglot_flutter_sdk/src/api/polyglot_api.dart';
+import 'package:polyglot_flutter_sdk/src/model/polyglot_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PolyglotLanguage extends ChangeNotifier {
-  PolyglotApi? _polyglotApi;
+  BasePolyglotApi? _polyglotApi;
   Locale _appLocale = Locale('en');
 
   late PolyglotModel? _localizedStrings;
