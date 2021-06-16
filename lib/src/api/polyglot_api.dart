@@ -12,15 +12,16 @@ class PolyglotApi extends BasePolyglotApi {
   Future<PolyglotModel?> getPolyglotLanguages() async {
     try {
       final url = Uri.parse(projectUrl);
-      final response =
-          await http.get(url, headers: {"Content-Type": "application/json"});
+      final response = await http.get(url,
+          headers: {"Content-Type": "application/json; charset=UTF-8"});
       if (response.statusCode != 200)
         throw HttpException('${response.statusCode}');
+      final body = utf8.decode(response.bodyBytes);
       final prefs = await SharedPreferences.getInstance();
       var cachedString = prefs.getString('cached_languages');
-      if (cachedString == null || cachedString != response.body) {
-        prefs.setString('cached_languages', response.body);
-        cachedString = response.body;
+      if (cachedString == null || cachedString != body) {
+        prefs.setString('cached_languages', body);
+        cachedString = body;
       }
       return PolyglotModel.fromJson(jsonDecode(cachedString));
     } on SocketException {
